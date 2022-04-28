@@ -1,0 +1,6 @@
+CREATE TABLE clothing_store (id INTEGER PRIMARY KEY, item TEXT, price INTEGER, quantity INTEGER, color TEXT);
+INSERT INTO clothing_store VALUES (1, "shirts", 16, 8, "red");
+INSERT INTO clothing_store VALUES (2, "pants", 30, 10, "blue");
+INSERT INTO clothing_store VALUES (3, "dresses", 45, 15, "green");
+SELECT * FROM clothing_store ORDER BY price;
+SELECT SUM(quantity) FROM clothing_store;
