@@ -1,0 +1,26 @@
+CREATE TABLE author (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, age INTEGER);
+
+INSERT INTO author (name, age) VALUES ("JK Rowling", 60);
+INSERT INTO author (name, age) VALUES ("Jen Grubbs", 29);
+INSERT INTO author (name, age) VALUES ("Rebecca Roanhorse", 35);
+INSERT INTO author (name, age) VALUES ("Sabaa Tahir", 34);
+INSERT INTO author (name, age) VALUES ("Stephen King", 50);
+
+CREATE TABLE author_info (id INTEGER PRIMARY KEY AUTOINCREMENT,author_id INTEGER, book_title TEXT);
+
+INSERT INTO author_info (author_id, book_title) VALUES (1, "Harry Potter & The Sorcerer's Stone");
+INSERT INTO author_info (author_id, book_title) VALUES (1, "Harry Potter & The Chamber of Secrets");
+INSERT INTO author_info (author_id, book_title) VALUES (2, "The Book of Jen");
+INSERT INTO author_info (author_id, book_title) VALUES (2, "Hey There");
+INSERT INTO author_info (author_id, book_title) VALUES (3, "Black Sun");
+INSERT INTO author_info (author_id, book_title) VALUES (3, "Fevered Star");
+INSERT INTO author_info (author_id, book_title) VALUES (4, "An Ember in the Ashes");
+INSERT INTO author_info (author_id, book_title) VALUES (5, "IT");
+
+
+
+
+SELECT * FROM author;
+SELECT * FROM author_info;
+
+SELECT author.name, author_info.book_title FROM author JOIN author_info ON author.id=author_info.author_id;
