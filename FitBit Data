@@ -1,0 +1,63 @@
+#I downloaded and analyzed FitBit Data from Kaggle.
+
+CREATE TABLE BIT_DB.dailyactivity
+(customer_id INTEGER NOT NULL,
+activity_date DATE NOT NULL,
+total_steps INTEGER NOT NULL,
+total_distance DECIMAL (3,2) NOT NULL,
+tracker_distance DECIMAL (3,2) NOT NULL,
+logged_activities INTEGER NOT NULL,
+very_active_distance DECIMAL (3,2)NOT NULL,
+moderately_active_distance DECIMAL (3,2) NOT NULL,
+light_active_distance DECIMAL (3,2) NOT NULL,
+sedentary_active INTEGER NOT NULL,
+very_active_minutes INTEGER NOT NULL,
+fairly_active_minutes INTEGER NOT NULL,
+lightly_active_minutes INTEGER NOT NULL,
+sedentary_minutes INTEGER NOT NULL,
+calories INTEGER NOT NULL);
+
+CREATE TABLE BIT_DB.sleep
+(customer_id INTEGER NOT NULL,
+date DATE NOT NULL,
+sleep_records INTEGER NOT NULL,
+minutes_asleep INTEGER NOT NULL,
+minutes_in_bed INTEGER NOT NULL);
+
+SELECT *
+FROM BIT_DB.dailyactivity;
+
+1. Find the average daily steps for each customer:
+
+SELECT customer_id, ROUND(AVG(total_steps), 0) as avg_steps
+FROM BIT_DB.dailyactivity
+GROUP BY customer_id
+ORDER BY avg_steps;
+
+2. Based on their average steps, divide up the customers into how active their lifestyle is:
+
+SELECT customer_id, ROUND(AVG(total_steps), 0) AS avg_steps,
+CASE
+WHEN ROUND(AVG(total_steps), 0)<5000 THEN 'sedentary'
+WHEN ROUND(AVG(total_steps), 0) BETWEEN 5000 AND 7499 THEN 'lightly_active'
+WHEN ROUND(AVG(total_steps), 0) BETWEEN 7500 AND 9999 THEN 'fairly_active'
+WHEN ROUND(AVG(total_steps), 0)>10000 THEN 'very_active'
+ELSE 'below_target'
+END as activity_level
+FROM BIT_DB.dailyactivity
+GROUP BY customer_id
+ORDER BY avg_steps;
+
+3. Look at everything for the table sleep:
+
+SELECT *
+FROM BIT_DB.sleep;
+
+4.For each person, what is the average amount of mins slept, and average amount of steps?
+
+SELECT sleep.customer_id, ROUND(AVG(sleep.minutes_asleep),0) as avg_mins_asleep, ROUND(AVG(dailyactivity.total_steps), 0) AS avg_steps
+FROM sleep
+JOIN dailyactivity
+ON sleep.customer_id=dailyactivity.customer_id
+GROUP BY sleep.customer_id
+ORDER BY avg_mins_asleep;
