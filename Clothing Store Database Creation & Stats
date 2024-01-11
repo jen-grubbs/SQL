@@ -1,0 +1,24 @@
+#This project involves a Store Database table of my own creation, and utilizes said data:
+
+CREATE TABLE clothing_store (id INTEGER PRIMARY KEY, item TEXT, price INTEGER, quantity INTEGER, color TEXT);
+INSERT INTO clothing_store VALUES (1, "shirts", 16, 8, "red");
+INSERT INTO clothing_store VALUES (2, "pants", 30, 10, "blue");
+INSERT INTO clothing_store VALUES (3, "dresses", 45, 15, "green");
+
+#Show all the columns and order the items by price.
+SELECT * 
+FROM clothing_store 
+ORDER BY price;
+
+#Show the number of dresses that are in stock.
+SELECT item, quantity
+FROM clothing_store
+WHERE item = 'dresses';
+
+#Show which item is the cheapest.
+SELECT MIN(price), item
+FROM clothing_store;
+
+#Show the average price of all the items.
+SELECT AVG(price)
+FROM clothing_store;
