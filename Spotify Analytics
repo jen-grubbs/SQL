@@ -44,7 +44,7 @@ FROM BIT_DB.spotifydata
 ORDER BY popularity desc
 LIMIT 10
 
-#Next I figured which artists & thri track names have a tempo less than 90
+#Next I figured out which track names (& their artists) have a tempo less than 90
 SELECT artist_name, track_name,tempo
 FROM BIT_DB.SpotifyData
 WHERE tempo<90
